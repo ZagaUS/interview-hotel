@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class Booking extends PanacheEntity {
 
     @NotNull(message = "User ID is mandatory")
-    private Long userId;
+    private String guestId;
 
     @NotNull(message = "Tour ID is mandatory")
     @ManyToOne

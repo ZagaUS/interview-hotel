@@ -23,6 +23,8 @@ public class BusTransportationProvider extends PanacheEntity {
     @Size(max = 100, message = "Provider's name cannot exceed {max} characters")
     private String name;
 
+    private String id;
+
     @NotBlank(message = "Provider's address is mandatory")
     @Size(max = 200, message = "Provider's address cannot exceed {max} characters")
     private String address;

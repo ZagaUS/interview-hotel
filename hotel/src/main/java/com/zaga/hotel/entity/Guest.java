@@ -11,18 +11,24 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.cli.annotations.Description;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Guest")
 @Description("Guest information are manages here ")
-public class Guest extends PanacheEntity {
+public class Guest extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String guestId;
 
     @NotBlank(message = "Name is mandatory")
     @Length(max = 50, message = "Name cannot exceed {max} characters")
@@ -39,9 +45,12 @@ public class Guest extends PanacheEntity {
     @Column(name = "billing_info")
     private String billingInfo;
 
-    @Lob
     @NotNull
-    @Column(name = "id_proof")
-    private byte[] idProof;
+    private String address;
+
+    // @Lob
+    // @NotNull
+    // @Column(name = "id_proof")
+    // private byte[] idProof;
 
 }

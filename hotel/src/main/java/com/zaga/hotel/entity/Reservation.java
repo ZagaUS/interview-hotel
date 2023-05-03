@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class Reservation extends PanacheEntity {
 
     @NotNull(message = "User ID is mandatory")
-    private Long userId;
+    private String guestId;
 
     @NotNull(message = "Hotel ID is mandatory")
     @ManyToOne
