@@ -1,5 +1,6 @@
 package com.zaga.hotel.resource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -22,6 +24,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import com.zaga.hotel.entity.Reservation;
+import com.zaga.hotel.entity.Room;
 import com.zaga.hotel.service.ReservationService;
 
 @Path("/reservations")
@@ -99,5 +102,24 @@ public class ReservationResource {
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @GET
+    @Path("/available/{checkin}/{checkout}")
+    public List<Room> findAvailableRooms(@QueryParam("checkin") String checkin,
+            @QueryParam("checkout") String checkout) {
+        LocalDate checkinDate = LocalDate.parse(checkin);
+        LocalDate checkoutDate = LocalDate.parse(checkout);
+        return reservationService.findAvailableRooms(checkinDate, checkoutDate);
+    }
+
+    @GET
+    @Path("/{roomNumber}/available")
+    public Reservation isRoomAvailable(@PathParam("roomNumber") String roomNumber,
+            @QueryParam("checkin") String checkin,
+            @QueryParam("checkout") String checkout) {
+        LocalDate checkinDate = LocalDate.parse(checkin);
+        LocalDate checkoutDate = LocalDate.parse(checkout);
+        return reservationService.isRoomAvailable(roomNumber, checkinDate, checkoutDate);
     }
 }

@@ -1,9 +1,11 @@
 package com.zaga.hotel.serviceimpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.persistence.LockModeType;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -14,6 +16,7 @@ import com.zaga.hotel.entity.Room;
 import com.zaga.hotel.repo.GuestRepo;
 import com.zaga.hotel.repo.HotelRepository;
 import com.zaga.hotel.repo.ReservationRepository;
+import com.zaga.hotel.repo.RoomRepository;
 import com.zaga.hotel.service.ReservationService;
 
 @ApplicationScoped
@@ -27,6 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Inject
     HotelRepository hotelRepository;
+
+    @Inject
+    RoomRepository roomRepository;
 
     @Override
     public List<Reservation> getAllReservations() {
@@ -94,6 +100,16 @@ public class ReservationServiceImpl implements ReservationService {
             reservationRepository.persistAndFlush(reservation);
         }
         return reservations;
+    }
+
+    @Override
+    public List<Room> findAvailableRooms(LocalDate checkin, LocalDate checkout) {
+        return roomRepository.findAvailableRooms(checkin, checkout);
+    }
+
+    @Override
+    public Reservation isRoomAvailable(String roomNumber, LocalDate checkin, LocalDate checkout) {
+        return reservationRepository.findRoomBookingByRoomNumberAndDates(roomNumber, checkin, checkout);
     }
 
 }
