@@ -2,15 +2,12 @@ package com.zaga.hotel.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
-
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.smallrye.common.constraint.NotNull;
 import io.vertx.core.cli.annotations.Description;
@@ -48,9 +45,9 @@ public class Guest extends PanacheEntityBase {
     @NotNull
     private String address;
 
-    // @Lob
-    // @NotNull
-    // @Column(name = "id_proof")
-    // private byte[] idProof;
+    @Lob
+    @NotNull
+    @Column(name = "id_proof")
+    public byte[] idProof;
 
 }

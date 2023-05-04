@@ -1,5 +1,7 @@
 package com.zaga.hotel.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,8 +23,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 
+import com.zaga.hotel.entity.FormData;
 import com.zaga.hotel.entity.Guest;
+import com.zaga.hotel.repo.GuestRepo;
 import com.zaga.hotel.service.GuestService;
 
 @Path("/hotel/membership")
@@ -32,6 +37,9 @@ public class GuestResource {
 
     @Inject
     GuestService guestService;
+
+    @Inject
+    GuestRepo guestRepo;
 
     @POST
     @Path("/createGuest")
@@ -72,13 +80,25 @@ public class GuestResource {
         guestService.deleteGuest(guestId);
     }
 
-    // @PUT
-    // // @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    // @Consumes(MediaType.APPLICATION_JSON)
-    // public Response uploadguest(InputStream inputStream, @QueryParam("guestId")
-    // String guestId)
-    // throws IOException {
-    // guestService.uploadGuestDocument(inputStream, guestId);
-    // return Response.status(Response.Status.CREATED).build();
-    // }
+    @POST
+    @Path("/{guestId}/pdf")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Transactional
+    public Response updatePDF(@PathParam("guestId") String guestId, @MultipartForm FormData formData) {
+        Guest guest = guestRepo.findById(guestId);
+        if (guest == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
+        try (InputStream fileStream = formData.pdfFile) {
+            byte[] pdfBytes = fileStream.readAllBytes();
+            guest.idProof = pdfBytes;
+            guest.persist();
+        } catch (IOException e) {
+            // Handle the exception as needed
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return Response.ok().build();
+    }
 }
