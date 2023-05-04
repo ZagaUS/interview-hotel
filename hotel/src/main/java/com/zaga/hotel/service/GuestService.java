@@ -19,8 +19,4 @@ public interface GuestService {
 
     void deleteGuest(String guestId);
 
-    // void updateGuestIdProofPdf(String id, byte[] pdfData) throws Exception;
-
-    void uploadGuestDocument(InputStream inputStream, String guestId);
-
 }

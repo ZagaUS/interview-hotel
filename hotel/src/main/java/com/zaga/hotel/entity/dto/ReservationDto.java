@@ -1,39 +1,21 @@
-package com.zaga.hotel.entity;
+package com.zaga.hotel.entity.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reservation extends PanacheEntityBase {
-
-    @NotNull(message = "User ID is mandatory")
-    @ManyToOne
-    public Guest guestId;
-
-    @NotNull(message = "Hotel ID is mandatory")
-    @ManyToOne
-    public Hotel hotelId;
-
-    @NotNull(message = "Room roomNumber is mandatory")
-    @ManyToOne
-    public Room roomNumber;
+public class ReservationDto {
 
     @Id
     @NotNull(message = "Reservation ID is mandatory")

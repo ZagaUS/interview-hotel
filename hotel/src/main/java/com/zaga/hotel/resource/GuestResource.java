@@ -30,9 +30,12 @@ import com.zaga.hotel.entity.Guest;
 import com.zaga.hotel.repo.GuestRepo;
 import com.zaga.hotel.service.GuestService;
 
+import io.vertx.core.cli.annotations.Description;
+
 @Path("/hotel/membership")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name = "Guest profile -Api")
 public class GuestResource {
 
     @Inject
@@ -44,7 +47,7 @@ public class GuestResource {
     @POST
     @Path("/createGuest")
     @APIResponse(responseCode = "200", description = "Created a new guest  - guest", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.OBJECT, implementation = Guest.class)))
-    @Tag(name = "Create a new Guest profile -Api")
+    @Description("Create a new Guest profile -Api")
     @Transactional
     public Response createGuest(@Valid Guest guest) {
         guestService.createGuest(guest);
@@ -54,28 +57,28 @@ public class GuestResource {
 
     @GET
     @Path("/listallguest")
-    @Tag(name = "List All Guest -Api")
+    @Description("List All Guest -Api")
     public List<Guest> getAllGuests() {
         return guestService.findAllGuests();
     }
 
     @GET
     @Path("/guest/{guestId}")
-    @Tag(name = "Find guest by id -Api")
+    @Description("Find guest by id -Api")
     public Guest getGuestById(@PathParam("guestId") String guestId) {
         return guestService.findGuestById(guestId);
     }
 
     @PUT
     @Path("/guest/{guestId}")
-    @Tag(name = "Update Guest -Api")
+    @Description("Update Guest -Api")
     public Guest updateGuest(@PathParam("guestId") String guestId, @Valid Guest guest) {
         return guestService.updateGuest(guestId, guest);
     }
 
     @DELETE
     @Path("/guest/{guestId}")
-    @Tag(name = "Delete Guest -Api")
+    @Description("Delete Guest -Api")
     public void deleteGuest(@PathParam("guestId") String guestId) {
         guestService.deleteGuest(guestId);
     }
@@ -84,6 +87,7 @@ public class GuestResource {
     @Path("/{guestId}/pdf")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Transactional
+    @Description("upload the id proof api")
     public Response updatePDF(@PathParam("guestId") String guestId, @MultipartForm FormData formData) {
         Guest guest = guestRepo.findById(guestId);
         if (guest == null) {

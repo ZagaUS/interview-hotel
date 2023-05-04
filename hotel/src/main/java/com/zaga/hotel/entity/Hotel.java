@@ -1,16 +1,17 @@
 package com.zaga.hotel.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -18,8 +19,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Hotel extends PanacheEntity {
+public class Hotel extends PanacheEntityBase {
+
+    @Id
+    private Long hotelId;
 
     @NotBlank(message = "Hotel name is mandatory")
     @Size(max = 100, message = "Hotel name cannot exceed {max} characters")
@@ -38,5 +41,5 @@ public class Hotel extends PanacheEntity {
     private Integer numRoomsAvailable;
 
     @NotNull(message = "Total Number of rooms available")
-    private Integer TotalRooms;
+    private Integer totalRooms;
 }

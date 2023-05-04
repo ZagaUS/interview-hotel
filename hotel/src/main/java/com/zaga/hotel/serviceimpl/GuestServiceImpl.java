@@ -52,24 +52,4 @@ public class GuestServiceImpl implements GuestService {
         Guest.deleteById(guestId);
     }
 
-    // @Override
-    // public void updateGuestIdProofPdf(String id, byte[] pdfData) throws Exception
-    // {
-    // Guest guest = guestRepo.findById(id);
-    // if (guest == null) {
-    // throw new NotFoundException("Guest not found with id " + id);
-    // }
-
-    // guest.setIdProof(pdfData);
-    // guestRepo.persist(guest);
-    // }
-
-    @Override
-    public void uploadGuestDocument(InputStream inputStream, String guestId) {
-        // Guest findGuest = guestRepo.findById(guestId);
-        // findGuest.setIdProof(Binary(inputStream.readAllBytes()));
-        // // Binary(inputStream.readAllBytes());
-
-        // guestRepo.update(guestId, null);
-    }
 }
