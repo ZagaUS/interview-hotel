@@ -32,7 +32,7 @@ import com.zaga.hotel.service.GuestService;
 
 import io.vertx.core.cli.annotations.Description;
 
-@Path("/hotel/membership")
+@Path("/hotel")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Guest profile -Api")

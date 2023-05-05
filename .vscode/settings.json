@@ -1,0 +1,6 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.project.sourcePaths": [
+        "travel/src/main/java/com/zaga/travel/repo"
+    ]
+}

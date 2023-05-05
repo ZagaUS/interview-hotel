@@ -2,6 +2,7 @@ package com.zaga.hotel.entity;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -19,9 +20,9 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class ScenicTourProvider extends PanacheEntity {
 
-    @NotBlank(message = "Provider's name is mandatory")
-    @Size(max = 100, message = "Provider's name cannot exceed {max} characters")
-    private String name;
+    @NotBlank(message = "Tour provider's name is mandatory")
+    @Size(max = 100, message = "Tour provider's name cannot exceed {max} characters")
+    private String providerName;
 
     @NotBlank(message = "Provider's address is mandatory")
     @Size(max = 200, message = "Provider's address cannot exceed {max} characters")
@@ -34,4 +35,8 @@ public class ScenicTourProvider extends PanacheEntity {
     @NotBlank(message = "Type of tour available is mandatory")
     @Size(max = 50, message = "Type of tour available cannot exceed {max} characters")
     private String tourType;
+
+    @NotBlank(message = "Tour duration is mandatory")
+    @Positive(message = "Tour duration must be positive")
+    private Integer duration;
 }

@@ -1,4 +1,4 @@
-package com.zaga.hotel.entity;
+package com.zaga.travel.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

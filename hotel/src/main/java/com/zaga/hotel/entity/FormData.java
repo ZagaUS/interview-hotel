@@ -2,7 +2,6 @@ package com.zaga.hotel.entity;
 
 import java.io.InputStream;
 
-import javax.persistence.Entity;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.core.MediaType;
 

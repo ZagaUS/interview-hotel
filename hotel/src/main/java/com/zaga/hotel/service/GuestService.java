@@ -15,7 +15,7 @@ public interface GuestService {
 
     Guest findGuestById(String guestId);
 
-    Guest updateGuest(String guestId, @Valid Guest guest);
+    Guest updateGuest(String guestId, Guest guest);
 
     void deleteGuest(String guestId);
 

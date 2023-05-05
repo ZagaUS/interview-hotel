@@ -32,7 +32,7 @@ public class RoomResource {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/{roomId}")
     public Room getRoomById(@PathParam("roomId") Long roomId) {
         return roomService.getRoomById(roomId);
     }
@@ -44,13 +44,13 @@ public class RoomResource {
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/{roomId}")
     public Room updateRoom(@PathParam("roomId") Long roomId, Room room) {
         return roomService.updateRoom(roomId, room);
     }
 
     @DELETE
-    @Path("/{id}")
+    @Path("/{roomId}")
     public Response deleteRoom(@PathParam("roomId") Long roomId) {
         roomService.deleteRoom(roomId);
         return Response.noContent().build();

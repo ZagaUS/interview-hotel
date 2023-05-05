@@ -1,12 +1,14 @@
 package com.zaga.hotel.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,15 +21,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Tour extends PanacheEntity {
+public class Tour extends PanacheEntityBase {
+
+    @Id
+    private Long tourId;
 
     @NotBlank(message = "Tour provider's name is mandatory")
     @Size(max = 100, message = "Tour provider's name cannot exceed {max} characters")
     private String providerName;
 
-    @NotBlank(message = "Tour name is mandatory")
-    @Size(max = 100, message = "Tour name cannot exceed {max} characters")
-    private String name;
+    @NotBlank(message = "guide's name is mandatory")
+    @Size(max = 100, message = "guide's name cannot exceed {max} characters")
+    private String guideName;
 
     @NotBlank(message = "Tour description is mandatory")
     @Size(max = 500, message = "Tour description cannot exceed {max} characters")

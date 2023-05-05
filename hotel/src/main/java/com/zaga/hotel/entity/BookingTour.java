@@ -20,15 +20,14 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Booking extends PanacheEntity {
+public class BookingTour extends PanacheEntity {
 
     @NotNull(message = "User ID is mandatory")
     private String guestId;
 
     @NotNull(message = "Tour ID is mandatory")
     @ManyToOne
-    private Tour tour;
+    private Tour tourId;
 
     @NotNull(message = "Booking date is mandatory")
     private LocalDate bookingDate;

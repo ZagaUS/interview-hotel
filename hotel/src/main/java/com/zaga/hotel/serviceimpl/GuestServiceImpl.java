@@ -36,7 +36,7 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     @Transactional
-    public Guest updateGuest(String guestId, @Valid Guest guest) {
+    public Guest updateGuest(String guestId, Guest guest) {
         Guest guestToUpdate = Guest.findById(guestId);
         guestToUpdate.setName(guest.getName());
         guestToUpdate.setEmail(guest.getEmail());
